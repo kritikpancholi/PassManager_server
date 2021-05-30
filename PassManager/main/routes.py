@@ -9,7 +9,6 @@ main = Blueprint('main', __name__)
 
 class PasswordSchema(ma.Schema):
     class Meta:
-        # Fields to expose
         fields = ("email", "title", "user_password" , "user_id" ,"id")
 
 
@@ -38,8 +37,8 @@ def createPassword():
     new_entry_password= Password(email=email_id, user_id=id, user_password=password, title=pass_title)
     # db.session.add(new_entry_password)
     # db.session.commit()
-    val= Password.query.filter_by(user_id=id).all()
+    val= Password.query.filter_by(email=email_id).all()
 
     #print(jsonify(data = val))
 
-    return passwords_schema.dump(val)
+    return jsonify(passwords_schema.dump(val))
