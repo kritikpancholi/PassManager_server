@@ -6,7 +6,7 @@ class User (db.Model):
     '''
     id= db.Column(db.Integer, primary_key = True)
     email= db.Column(db.String(100), unique = True)
-    password= db.Column(db.String)
+    password= db.Column(db.String(100))
  
     def __init__(self, email, password):
         self.email= email
@@ -20,7 +20,7 @@ class Password (db.Model):
     id= db.Column(db.Integer, primary_key= True, unique= True)
     title= db.Column(db.String(100)) 
     email= db.Column(db.String(100))
-    user_password= db.Column(db.String(100))
+    user_password= db.Column(db.String)
     user_id= db.Column(db.Integer)
 
     def __init__(self, email, user_password, user_id, title):

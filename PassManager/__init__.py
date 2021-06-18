@@ -10,5 +10,8 @@ app.config['SQLALCEMY_TRACK_MODIFICATIONS']= False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
-from PassManager.main.routes import main
-app.register_blueprint(main)
+from PassManager.main.passwords import password_blueprint
+app.register_blueprint(password_blueprint)
+
+from PassManager.main.user_auth_route import user_auth
+app.register_blueprint(user_auth)
