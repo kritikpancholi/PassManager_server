@@ -30,10 +30,10 @@ def showPassword():
 
 @password_blueprint.route('/create_password', methods=['POST' , 'GET'])
 def createPassword():      
-    id= request.args.get('user_id')
-    email_id= request.args.get('email')
-    password= request.args.get('user_password')
-    pass_title= request.args.get('title')
+    id= request.json.get('user_id')
+    email_id= request.json.get('email')
+    password= request.json.get('user_password')
+    pass_title= request.json.get('title')
     new_entry_password= Password(email=email_id, user_id=id, user_password=password, title=pass_title)
     db.session.add(new_entry_password)
     db.session.commit()
@@ -47,3 +47,12 @@ def createPassword():
 def show_all():
     val = Password.query.all()
     return jsonify(passwords_schema.dump(val))
+
+@password_blueprint.route('/delete_password',methods = ['DELETE'])
+def delete_password():
+    to_delete_id = request.json.get('id')
+    val = Password.query.filter_by(id = to_delete_id).first()
+    db.session.delete(val)
+    db.session.commit()
+
+    return "<h1>delete</h1>"

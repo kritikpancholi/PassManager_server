@@ -18,10 +18,10 @@ class Password (db.Model):
         Password model takes in title, email, user password and user id
     '''
     id= db.Column(db.Integer, primary_key= True, unique= True)
-    title= db.Column(db.String(100)) 
-    email= db.Column(db.String(100))
-    user_password= db.Column(db.String)
-    user_id= db.Column(db.Integer)
+    title= db.Column(db.String(100) ,nullable = False) 
+    email= db.Column(db.String(100),nullable = False)
+    user_password= db.Column(db.String ,nullable = False)
+    user_id= db.Column(db.Integer,nullable = False)
 
     def __init__(self, email, user_password, user_id, title):
         self.email= email
