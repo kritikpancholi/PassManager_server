@@ -26,7 +26,7 @@ def showPassword():
     val = Password.query.filter_by(user_id=id).all()
     if val:
         return jsonify(passwords_schema.dump(val))
-    return jsonify({'status_code': 404}) 
+    return jsonify({'status_code': 400}) 
 
 @password_blueprint.route('/create_password', methods=['POST' , 'GET'])
 def createPassword():      
@@ -34,6 +34,8 @@ def createPassword():
     email_id= request.json.get('email')
     password= request.json.get('user_password')
     pass_title= request.json.get('title')
+    if email_id == '' :
+        return 'Password not added ', 400
     new_entry_password= Password(email=email_id, user_id=id, user_password=password, title=pass_title)
     db.session.add(new_entry_password)
     db.session.commit()
@@ -48,11 +50,11 @@ def show_all():
     val = Password.query.all()
     return jsonify(passwords_schema.dump(val))
 
-@password_blueprint.route('/delete_password',methods = ['DELETE'])
-def delete_password():
-    to_delete_id = request.json.get('id')
-    val = Password.query.filter_by(id = to_delete_id).first()
+@password_blueprint.route('/delete_password/<id_to>',methods = ['DELETE'])
+def delete_password(id_to):
+   #to_delete_id = request.json.get('id')
+    val = Password.query.filter_by(id = id_to).first()
     db.session.delete(val)
     db.session.commit()
 
-    return "<h1>delete</h1>"
+    return 'Deleted' , 200

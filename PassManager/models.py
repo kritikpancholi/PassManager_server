@@ -28,3 +28,18 @@ class Password (db.Model):
         self.user_password= user_password 
         self.user_id= user_id
         self.title= title
+
+
+class Note (db.Model):
+
+    id= db.Column(db.Integer, primary_key= True, unique= True)
+    title= db.Column(db.String(100) ,nullable = False) 
+    description= db.Column(db.String(100),nullable = False)
+    user_id= db.Column(db.Integer,nullable= False)
+
+
+    def __init__(self, user_id, title , description):
+        self.description= description
+        self.user_id= user_id
+        self.title= title
+

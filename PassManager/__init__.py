@@ -13,5 +13,10 @@ ma = Marshmallow(app)
 from PassManager.main.passwords import password_blueprint
 app.register_blueprint(password_blueprint)
 
+
+from PassManager.main.notes import notes_blueprint
+app.register_blueprint(notes_blueprint)
+
+
 from PassManager.main.user_auth_route import user_auth
 app.register_blueprint(user_auth)

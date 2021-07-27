@@ -26,6 +26,7 @@ def signIn():
 
     db.session.add(user)
     db.session.commit()
+    
     val = User.query.filter_by(email = user_email , password = user_password).first()
     return jsonify(
         id = val.id,
