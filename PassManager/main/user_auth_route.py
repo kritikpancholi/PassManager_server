@@ -16,8 +16,8 @@ users_schema = UserSchema(many=True)
 
 @user_auth.route('/signIn' , methods =['POST'])
 def signIn():
-    user_email = request.args.get('email')
-    user_password = request.args.get('password')
+    user_email = request.json.get('email')
+    user_password = request.json.get('password')
 
     val = User.query.filter_by(email = user_email , password = user_password).first()
     if(val):
